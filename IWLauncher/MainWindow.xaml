@@ -1,0 +1,37 @@
+﻿<Controls:MetroWindow x:Class="IWLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IWLauncher"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="IWLauncher" Height="350" Width="525" ResizeMode="CanMinimize">
+    <Grid>
+        <Button x:Name="button" Content="Start" HorizontalAlignment="Left" Height="29" Margin="10,280,0,0" VerticalAlignment="Top" Width="229" Click="button_Click" Cursor="Hand"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="19" Margin="83,16,0,0" VerticalAlignment="Top" Width="136" Cursor="Hand"/>
+        <Label x:Name="label" Content="Rank: " HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="43"/>
+        <Label x:Name="label_Copy" Content="Name:" HorizontalAlignment="Left" Height="28" Margin="10,43,0,0" VerticalAlignment="Top" Width="52"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="20" Margin="83,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <Label x:Name="label_Copy1" Content="Champion:" HorizontalAlignment="Left" Height="28" Margin="10,76,0,0" VerticalAlignment="Top" Width="69"/>
+        <TextBox x:Name="championBox" HorizontalAlignment="Left" Height="20" Margin="83,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <Label x:Name="label_Copy2" Content="Team:" HorizontalAlignment="Left" Height="28" Margin="10,109,0,0" VerticalAlignment="Top" Width="69"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Height="20" Margin="83,114,0,0" VerticalAlignment="Top" Width="136" Cursor="Hand"/>
+        <Label x:Name="label_Copy3" Content="Summoner 1:" HorizontalAlignment="Left" Height="28" Margin="242,10,0,0" VerticalAlignment="Top" Width="85"/>
+        <Label x:Name="label_Copy4" Content="Summoner 2:" HorizontalAlignment="Left" Height="28" Margin="242,43,0,0" VerticalAlignment="Top" Width="85"/>
+        <Label x:Name="label_Copy5" Content="Skin:" HorizontalAlignment="Left" Height="28" Margin="242,76,0,0" VerticalAlignment="Top" Width="69"/>
+        <Label x:Name="label_Copy6" Content="Ribbon:" HorizontalAlignment="Left" Height="28" Margin="242,109,0,0" VerticalAlignment="Top" Width="69"/>
+        <Label x:Name="label_Copy7" Content="Icon: " HorizontalAlignment="Left" Height="28" Margin="10,142,0,0" VerticalAlignment="Top" Width="69"/>
+        <TextBox x:Name="iconBox" HorizontalAlignment="Left" Height="20" Margin="83,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="sum1Box" HorizontalAlignment="Left" Height="20" Margin="332,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="sum2Box" HorizontalAlignment="Left" Height="20" Margin="332,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="skinBox" HorizontalAlignment="Left" Height="20" Margin="332,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Height="20" Margin="332,114,0,0" VerticalAlignment="Top" Width="136" Cursor="Hand"/>
+        <Rectangle Fill="#FF666666" HorizontalAlignment="Left" Height="4" Margin="12,180,0,0" Stroke="#FF666666" VerticalAlignment="Top" Width="485"/>
+        <Label x:Name="label_Copy8" Content="LoL 4.20 path:" HorizontalAlignment="Left" Height="28" Margin="10,198,0,0" VerticalAlignment="Top" Width="88"/>
+        <TextBox x:Name="pathBox" HorizontalAlignment="Left" Height="19" Margin="103,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="394"/>
+        <Label x:Name="label1" Content="Waiting for server ..." HorizontalAlignment="Left" Height="52" Margin="138,228,0,0" VerticalAlignment="Top" Width="246" FontSize="26.667" Visibility="Hidden"/>
+        <Button x:Name="button1" Content="Save" HorizontalAlignment="Left" Height="29" Margin="280,280,0,0" VerticalAlignment="Top" Width="229" Click="button1_Click" Cursor="Hand"/>
+
+    </Grid>
+</Controls:MetroWindow>
