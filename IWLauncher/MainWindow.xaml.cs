@@ -30,6 +30,7 @@ namespace IWLauncher
         
         string currentFolder = Directory.GetCurrentDirectory();
         string settingsFolder;
+        string map;
 
         public MainWindow()
         {
@@ -61,6 +62,19 @@ namespace IWLauncher
                 comboBox2.SelectedItem = data["players"][0]["ribbon"].ToString();
                 JObject data2 = JObject.Parse(File.ReadAllText(settingsFolder + "\\settings.json"));
                 pathBox.Text = data2["radsPath"].ToString();
+                gameModeCombo.Items.Add("LeagueSandbox-Default");
+                mapCombo.Items.Add("Summoner's Rift");
+                mapCombo.Items.Add("Twisted Treeline");
+                mapCombo.Items.Add("Howling Abyss");
+                mapCombo.Items.Add("Crystal Scar");
+                if(data["game"]["map"].ToString() == "1") { mapCombo.SelectedIndex = 0; } //SR
+                if (data["game"]["map"].ToString() == "8") { mapCombo.SelectedIndex = 3; } //CS
+                if (data["game"]["map"].ToString() == "10") { mapCombo.SelectedIndex = 1; } //TT
+                if (data["game"]["map"].ToString() == "12") { mapCombo.SelectedIndex = 2; } //HA
+                gameModeCombo.SelectedItem = data["game"]["gameMode"].ToString();
+                ipBox.Text = IWLauncher.Properties.Settings.Default.ip;
+                portBox.Text = IWLauncher.Properties.Settings.Default.port;
+
             }
             else
             {
@@ -83,7 +97,7 @@ namespace IWLauncher
             cmd.StartInfo.UseShellExecute = false;
             cmd.Start();
             cmd.StandardInput.WriteLine("@cd /d " + pathBox.Text.Replace("RADS/projects/lol_game_client", "").Replace(@"/", @"\") + "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\"");
-            cmd.StandardInput.WriteLine("@start \"\" \"League of Legends.exe\" \"8394\" \"LoLLauncher.exe\" \"\" \"127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg== 1\"");
+            cmd.StandardInput.WriteLine("@start \"\" \"League of Legends.exe\" \"8394\" \"LoLLauncher.exe\" \"\" \"" + IWLauncher.Properties.Settings.Default.ip + " " + IWLauncher.Properties.Settings.Default.port + " 17BLOhi6KZsTtldTsizvHg== 1\"");
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
             Console.WriteLine(cmd.StandardOutput.ReadToEnd());
@@ -92,6 +106,10 @@ namespace IWLauncher
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            if (mapCombo.SelectedIndex == 0) { map = "1"; } //SR
+            if (mapCombo.SelectedIndex == 3) { map = "8"; } //CS
+            if (mapCombo.SelectedIndex == 1) { map = "10"; } //TT
+            if (mapCombo.SelectedIndex == 2) { map = "12"; } //HA
             GameInfo info = new GameInfo();
             info.name = nameBox.Text;
             info.icon = iconBox.Text;
@@ -103,10 +121,14 @@ namespace IWLauncher
             info.skin = skinBox.Text;
             info.champion = championBox.Text;
             string text = JsonConvert.SerializeObject(info);
-            text = "{\"players\": [ {" + text.Replace("{", "") + "],\"game\": {\"map\": 1,\"gameMode\": \"LeagueSandbox-Default\"}}";
+            text = "{\"players\": [ {" + text.Replace("{", "") + "],\"game\": {\"map\": " + map + ",\"gameMode\": \"" + gameModeCombo.SelectedItem + "\"}}";
             File.WriteAllText(settingsFolder + "\\GameInfo.json", text);
             string path = "{\"radsPath\":\"" + pathBox.Text + "\"}";
             File.WriteAllText(settingsFolder + "\\settings.json", path);
+            IWLauncher.Properties.Settings.Default.ip = ipBox.Text;
+            IWLauncher.Properties.Settings.Default.port = portBox.Text;
+            IWLauncher.Properties.Settings.Default.Save();
+            MessageBox.Show("New settings have been saved!", "IWLauncher", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 
