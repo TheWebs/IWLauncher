@@ -19,6 +19,8 @@ using System.Diagnostics;
 using MahApps;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
+using System.Net;
+using System.Threading;
 
 namespace IWLauncher
 {
@@ -39,6 +41,18 @@ namespace IWLauncher
             if (File.Exists(settingsFolder + "settings.json") && File.Exists(settingsFolder + "GameInfo.json"))
             {
                 //no problem
+                //if there isn't an icons list get one (takes a while)
+                if (!File.Exists(currentFolder + "\\iconList.txt"))
+                {
+
+                    Icons.GetAllIconsGitHub();
+
+                }
+                        foreach (string line in File.ReadAllLines(currentFolder + "\\iconList.txt"))
+                        {
+                            iconComboBox.Items.Add(line.Replace(".png", ""));
+                        }
+                
                 string savedSettings = File.ReadAllText(settingsFolder + "\\GameInfo.json");
                 JObject data = JObject.Parse(savedSettings);
                 comboBox.Items.Add("CHALLENGER");
@@ -58,11 +72,17 @@ namespace IWLauncher
                 skinBox.Text = data["players"][0]["skin"].ToString();
                 sum1Box.Text = data["players"][0]["summoner1"].ToString();
                 sum2Box.Text = data["players"][0]["summoner2"].ToString();
-                iconBox.Text = data["players"][0]["icon"].ToString();
+                iconComboBox.SelectedItem = data["players"][0]["icon"].ToString();
                 comboBox2.SelectedItem = data["players"][0]["ribbon"].ToString();
                 JObject data2 = JObject.Parse(File.ReadAllText(settingsFolder + "\\settings.json"));
                 pathBox.Text = data2["radsPath"].ToString();
-                gameModeCombo.Items.Add("LeagueSandbox-Default");
+                //Check for available gamemodes
+                foreach(string folder in Directory.GetDirectories(currentFolder + "\\Content\\GameMode"))
+                {
+                    DirectoryInfo info = new DirectoryInfo(folder);
+                    gameModeCombo.Items.Add(info.Name);
+                }
+                
                 mapCombo.Items.Add("Summoner's Rift");
                 mapCombo.Items.Add("Twisted Treeline");
                 mapCombo.Items.Add("Howling Abyss");
@@ -112,7 +132,7 @@ namespace IWLauncher
             if (mapCombo.SelectedIndex == 2) { map = "12"; } //HA
             GameInfo info = new GameInfo();
             info.name = nameBox.Text;
-            info.icon = iconBox.Text;
+            info.icon = iconComboBox.SelectedItem.ToString();
             info.rank = comboBox.SelectedItem.ToString();
             info.team = comboBox1.SelectedItem.ToString();
             info.summoner1 = sum1Box.Text;
@@ -130,6 +150,32 @@ namespace IWLauncher
             IWLauncher.Properties.Settings.Default.Save();
             MessageBox.Show("New settings have been saved!", "IWLauncher", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void iconComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string url = "http://ddragon.leagueoflegends.com/cdn/6.7.1/img/profileicon/" + iconComboBox.SelectedItem + ".png";
+            using (WebClient net = new WebClient())
+            {
+                net.DownloadFile(url, currentFolder + "\\temp.png");
+            }
+            image.Source = LoadBitmapImage(currentFolder + "\\temp.png");
+            File.Delete(currentFolder + "\\temp.png");
+        }
+
+        public static BitmapImage LoadBitmapImage(string fileName)
+        {
+            using (var stream = new FileStream(fileName, FileMode.Open))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
+        }
+
     }
 
 

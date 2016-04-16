@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IWLauncher"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="IWLauncher" Height="409.804" Width="609.314" ResizeMode="CanMinimize">
+        Title="IWLauncher" Height="461.46" Width="609.314" ResizeMode="CanMinimize">
     <Grid>
 
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="289" VerticalAlignment="Top" Width="603">
@@ -24,13 +24,14 @@
                     <Label x:Name="label_Copy4" Content="Summoner 2:" HorizontalAlignment="Left" Height="28" Margin="242,43,0,0" VerticalAlignment="Top" Width="85"/>
                     <Label x:Name="label_Copy5" Content="Skin:" HorizontalAlignment="Left" Height="28" Margin="242,76,0,0" VerticalAlignment="Top" Width="69"/>
                     <Label x:Name="label_Copy6" Content="Ribbon:" HorizontalAlignment="Left" Height="28" Margin="242,109,0,0" VerticalAlignment="Top" Width="69"/>
-                    <Label x:Name="label_Copy7" Content="Icon: " HorizontalAlignment="Left" Height="28" Margin="10,142,0,0" VerticalAlignment="Top" Width="69"/>
-                    <TextBox x:Name="iconBox" HorizontalAlignment="Left" Height="20" Margin="83,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+                    <Label x:Name="label_Copy7" Content="Icon: " HorizontalAlignment="Left" Height="28" Margin="10,178,0,0" VerticalAlignment="Top" Width="69"/>
                     <TextBox x:Name="sum1Box" HorizontalAlignment="Left" Height="20" Margin="332,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
                     <TextBox x:Name="sum2Box" HorizontalAlignment="Left" Height="20" Margin="332,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
                     <TextBox x:Name="skinBox" HorizontalAlignment="Left" Height="20" Margin="332,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
                     <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Height="20" Margin="332,114,0,0" VerticalAlignment="Top" Width="136" Cursor="Hand"/>
                     <Label x:Name="label1" Content="Waiting for server ..." HorizontalAlignment="Left" Height="52" Margin="138,228,0,0" VerticalAlignment="Top" Width="246" FontSize="26.667" Visibility="Hidden"/>
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="128" Margin="336,162,0,-46" VerticalAlignment="Top" Width="128"/>
+                    <ComboBox x:Name="iconComboBox" HorizontalAlignment="Left" Height="20" Margin="83,181,0,0" VerticalAlignment="Top" Width="136" Cursor="Hand" SelectionChanged="iconComboBox_SelectionChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Game" >
@@ -52,8 +53,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="button" Content="Start" HorizontalAlignment="Left" Height="29" Margin="312,323,0,0" VerticalAlignment="Top" Width="229" Click="button_Click" Cursor="Hand"/>
-        <Button x:Name="button1" Content="Save" HorizontalAlignment="Left" Height="29" Margin="54,323,0,0" VerticalAlignment="Top" Width="229" Click="button1_Click" Cursor="Hand"/>
+        <Button x:Name="button" Content="Start" HorizontalAlignment="Left" Height="29" Margin="312,376,0,0" VerticalAlignment="Top" Width="229" Click="button_Click" Cursor="Hand"/>
+        <Button x:Name="button1" Content="Save" HorizontalAlignment="Left" Height="29" Margin="54,376,0,0" VerticalAlignment="Top" Width="229" Click="button1_Click" Cursor="Hand"/>
 
     </Grid>
 </Controls:MetroWindow>
