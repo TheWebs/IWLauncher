@@ -120,8 +120,11 @@ namespace IWLauncher
             cmd.StandardInput.WriteLine("@start \"\" \"League of Legends.exe\" \"8394\" \"LoLLauncher.exe\" \"\" \"" + IWLauncher.Properties.Settings.Default.ip + " " + IWLauncher.Properties.Settings.Default.port + " 17BLOhi6KZsTtldTsizvHg== 1\"");
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
-            Console.WriteLine(cmd.StandardOutput.ReadToEnd());
+            //Console.WriteLine(cmd.StandardOutput.ReadToEnd()); ---> enable it if you want the program to wait for lol to exit
+            cmd.Dispose();
+            cmd.Close();
             //CMD
+
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
