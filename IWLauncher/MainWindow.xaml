@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IWLauncher"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="IWLauncher" Height="461.46" Width="609.314" ResizeMode="CanMinimize">
+        Title="IWLauncher" Height="461.46" Width="609.314" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="289" VerticalAlignment="Top" Width="603">

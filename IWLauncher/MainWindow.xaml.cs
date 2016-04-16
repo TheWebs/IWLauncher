@@ -56,6 +56,7 @@ namespace IWLauncher
                 string savedSettings = File.ReadAllText(settingsFolder + "\\GameInfo.json");
                 JObject data = JObject.Parse(savedSettings);
                 comboBox.Items.Add("CHALLENGER");
+                comboBox.Items.Add("MASTER");
                 comboBox.Items.Add("DIAMOND");
                 comboBox.Items.Add("GOLD");
                 comboBox.Items.Add("SILVER");
