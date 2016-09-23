@@ -145,9 +145,7 @@ namespace IWLauncher
             info.skin = skinBox.Text;
             info.champion = championBox.Text;
             string text = JsonConvert.SerializeObject(info);
-            MessageBox.Show(text);
             text = "{\"players\": [ {" + text.Replace("{", "").Replace("}", "") + runes + "],\"game\": {\"map\": " + map + ",\"gameMode\": \"" + gameModeCombo.SelectedItem + "\"}" + beta + "}";
-            MessageBox.Show(text);
             File.WriteAllText(settingsFolder + "\\GameInfo.json", text);
             string path = "{\"radsPath\":\"" + pathBox.Text + "\"}";
             File.WriteAllText(settingsFolder + "\\settings.json", path);
