@@ -106,7 +106,7 @@ namespace IWLauncher
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            
+            MessageBox.Show("@cd /d \"" + pathBox.Text.Replace("RADS/projects/lol_game_client", "").Replace(@"/", @"\") + "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\"");
             //CMD
             //Process.Start("IntWarsSharp.exe"); ---->uncomment when server can be executed from the .exe file
             //System.Threading.Thread.Sleep(1500);
@@ -145,7 +145,9 @@ namespace IWLauncher
             info.skin = skinBox.Text;
             info.champion = championBox.Text;
             string text = JsonConvert.SerializeObject(info);
-            text = "{\"players\": [ {" + text.Replace("{", "") + "],\"game\": {\"map\": " + map + ",\"gameMode\": \"" + gameModeCombo.SelectedItem + "\"}}";
+            MessageBox.Show(text);
+            text = "{\"players\": [ {" + text.Replace("{", "").Replace("}", "") + runes + "],\"game\": {\"map\": " + map + ",\"gameMode\": \"" + gameModeCombo.SelectedItem + "\"}" + beta + "}";
+            MessageBox.Show(text);
             File.WriteAllText(settingsFolder + "\\GameInfo.json", text);
             string path = "{\"radsPath\":\"" + pathBox.Text + "\"}";
             File.WriteAllText(settingsFolder + "\\settings.json", path);
@@ -180,7 +182,51 @@ namespace IWLauncher
             }
         }
 
+
+        string runes = @",""runes"": {
+              //DO NOT CHANGE THESE IF YOU DONT KNOW WHAT YOU ARE DOING.
+              ""1"": 5245,
+              ""2"": 5245,
+              ""3"": 5245,
+              ""4"": 5245,
+              ""5"": 5245,
+              ""6"": 5245,
+              ""7"": 5245,
+              ""8"": 5245,
+              ""9"": 5245,
+              ""10"": 5317,
+              ""11"": 5317,
+              ""12"": 5317,
+              ""13"": 5317,
+              ""14"": 5317,
+              ""15"": 5317,
+              ""16"": 5317,
+              ""17"": 5317,
+              ""18"": 5317,
+              ""19"": 5289,
+              ""20"": 5289,
+              ""21"": 5289,
+              ""22"": 5289,
+              ""23"": 5289,
+              ""24"": 5289,
+              ""25"": 5289,
+              ""26"": 5289,
+              ""27"": 5289,
+              ""28"": 5335,
+              ""29"": 5335,
+              ""30"": 5335
+            }}";
+
+        string beta = @"""spellInfo"": {
+      // True = sandbox mode
+      // False = normal game
+      ""NO_MANACOST"": true,
+      ""NO_COOLDOWN"": true
+    }";
+
     }
+
+    
 
 
 }
