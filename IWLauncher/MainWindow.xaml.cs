@@ -109,7 +109,7 @@ namespace IWLauncher
             MessageBox.Show("@cd /d \"" + pathBox.Text.Replace("RADS/projects/lol_game_client", "").Replace(@"/", @"\") + "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\"");
             //CMD
             Process.Start("LeagueSandboxGameServer.exe");
-            //System.Threading.Thread.Sleep(1500);
+            System.Threading.Thread.Sleep(1500);
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.RedirectStandardInput = true;
