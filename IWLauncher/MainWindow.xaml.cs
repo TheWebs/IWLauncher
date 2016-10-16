@@ -37,70 +37,80 @@ namespace IWLauncher
         public MainWindow()
         {
             InitializeComponent();
-            settingsFolder = currentFolder + "\\Settings\\";
-            if (File.Exists(settingsFolder + "settings.json") && File.Exists(settingsFolder + "GameInfo.json"))
+            if (IWLauncher.Properties.Settings.Default.FirstTime == true)
             {
-                //no problem
-                //if there isn't an icons list get one (takes a while)
-                if (!File.Exists(currentFolder + "\\iconList.txt"))
-                {
-
-                    Icons.GetAllIconsGitHub();
-
-                }
-                        foreach (string line in File.ReadAllLines(currentFolder + "\\iconList.txt"))
-                        {
-                            iconComboBox.Items.Add(line.Replace(".png", ""));
-                        }
-                
-                string savedSettings = File.ReadAllText(settingsFolder + "\\GameInfo.json");
-                JObject data = JObject.Parse(savedSettings);
-                comboBox.Items.Add("CHALLENGER");
-                comboBox.Items.Add("MASTER");
-                comboBox.Items.Add("DIAMOND");
-                comboBox.Items.Add("GOLD");
-                comboBox.Items.Add("SILVER");
-                comboBox.Items.Add("BRONZE");
-                comboBox1.Items.Add("BLUE");
-                comboBox1.Items.Add("PURPLE");
-                comboBox2.Items.Add("0");
-                comboBox2.Items.Add("1");
-                comboBox2.Items.Add("2");
-                comboBox.SelectedItem = data["players"][0]["rank"].ToString();
-                comboBox1.SelectedItem = data["players"][0]["team"].ToString();
-                nameBox.Text = data["players"][0]["name"].ToString();
-                championBox.Text = data["players"][0]["champion"].ToString();
-                skinBox.Text = data["players"][0]["skin"].ToString();
-                sum1Box.Text = data["players"][0]["summoner1"].ToString();
-                sum2Box.Text = data["players"][0]["summoner2"].ToString();
-                iconComboBox.SelectedItem = data["players"][0]["icon"].ToString();
-                comboBox2.SelectedItem = data["players"][0]["ribbon"].ToString();
-                JObject data2 = JObject.Parse(File.ReadAllText(settingsFolder + "\\settings.json"));
-                pathBox.Text = data2["radsPath"].ToString();
-                //Check for available gamemodes
-                foreach(string folder in Directory.GetDirectories(currentFolder + "\\Content\\GameMode"))
-                {
-                    DirectoryInfo info = new DirectoryInfo(folder);
-                    gameModeCombo.Items.Add(info.Name);
-                }
-                
-                mapCombo.Items.Add("Summoner's Rift");
-                mapCombo.Items.Add("Twisted Treeline");
-                mapCombo.Items.Add("Howling Abyss");
-                mapCombo.Items.Add("Crystal Scar");
-                if(data["game"]["map"].ToString() == "1") { mapCombo.SelectedIndex = 0; } //SR
-                if (data["game"]["map"].ToString() == "8") { mapCombo.SelectedIndex = 3; } //CS
-                if (data["game"]["map"].ToString() == "10") { mapCombo.SelectedIndex = 1; } //TT
-                if (data["game"]["map"].ToString() == "12") { mapCombo.SelectedIndex = 2; } //HA
-                gameModeCombo.SelectedItem = data["game"]["gameMode"].ToString();
-                ipBox.Text = IWLauncher.Properties.Settings.Default.ip;
-                portBox.Text = IWLauncher.Properties.Settings.Default.port;
-
+                DefinePath temp = new DefinePath();
+                temp.Topmost = true;
+                temp.Show();
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Something went wrong, did you drop me in the bin folder? (Could not find some key files)");
-                Environment.Exit(0);
+                
+                settingsFolder = currentFolder + "\\Settings\\";
+                if (File.Exists(settingsFolder + "GameInfo.json"))
+                {
+                    //no problem
+                    //if there isn't an icons list get one (takes a while)
+                    if (!File.Exists(currentFolder + "\\iconList.txt"))
+                    {
+
+                        Icons.GetAllIconsGitHub();
+
+                    }
+                    foreach (string line in File.ReadAllLines(currentFolder + "\\iconList.txt"))
+                    {
+                        iconComboBox.Items.Add(line.Replace(".png", ""));
+                    }
+
+                    string savedSettings = File.ReadAllText(settingsFolder + "\\GameInfo.json");
+                    JObject data = JObject.Parse(savedSettings);
+                    comboBox.Items.Add("CHALLENGER");
+                    comboBox.Items.Add("MASTER");
+                    comboBox.Items.Add("DIAMOND");
+                    comboBox.Items.Add("GOLD");
+                    comboBox.Items.Add("SILVER");
+                    comboBox.Items.Add("BRONZE");
+                    comboBox1.Items.Add("BLUE");
+                    comboBox1.Items.Add("PURPLE");
+                    comboBox2.Items.Add("0");
+                    comboBox2.Items.Add("1");
+                    comboBox2.Items.Add("2");
+                    comboBox.SelectedItem = data["players"][0]["rank"].ToString();
+                    comboBox1.SelectedItem = data["players"][0]["team"].ToString();
+                    nameBox.Text = data["players"][0]["name"].ToString();
+                    championBox.Text = data["players"][0]["champion"].ToString();
+                    skinBox.Text = data["players"][0]["skin"].ToString();
+                    sum1Box.Text = data["players"][0]["summoner1"].ToString();
+                    sum2Box.Text = data["players"][0]["summoner2"].ToString();
+                    iconComboBox.SelectedItem = data["players"][0]["icon"].ToString();
+                    comboBox2.SelectedItem = data["players"][0]["ribbon"].ToString();
+                    pathBox.Text = IWLauncher.Properties.Settings.Default.PathLol420;
+                    //Check for available gamemodes
+                    foreach (string folder in Directory.GetDirectories(currentFolder + "\\Content\\GameMode"))
+                    {
+                        DirectoryInfo info = new DirectoryInfo(folder);
+                        gameModeCombo.Items.Add(info.Name);
+                    }
+
+                    mapCombo.Items.Add("Summoner's Rift");
+                    mapCombo.Items.Add("Twisted Treeline");
+                    mapCombo.Items.Add("Howling Abyss");
+                    mapCombo.Items.Add("Crystal Scar");
+                    if (data["game"]["map"].ToString() == "1") { mapCombo.SelectedIndex = 0; } //SR
+                    if (data["game"]["map"].ToString() == "8") { mapCombo.SelectedIndex = 3; } //CS
+                    if (data["game"]["map"].ToString() == "10") { mapCombo.SelectedIndex = 1; } //TT
+                    if (data["game"]["map"].ToString() == "12") { mapCombo.SelectedIndex = 2; } //HA
+                    gameModeCombo.SelectedItem = data["game"]["gameMode"].ToString();
+                    ipBox.Text = IWLauncher.Properties.Settings.Default.ip;
+                    portBox.Text = IWLauncher.Properties.Settings.Default.port;
+
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong, did you drop me in the bin folder? (Could not find some key files)");
+                    Environment.Exit(0);
+                }
             }
         }
 
@@ -148,8 +158,7 @@ namespace IWLauncher
             string text = JsonConvert.SerializeObject(info); 
             text = "{\"players\": [ {" + text.Replace("{", "").Replace("}", "") + runes + "],\"game\": {\"map\": " + map + ",\"gameMode\": \"" + gameModeCombo.SelectedItem + "\"}" + beta + "}";
             File.WriteAllText(settingsFolder + "\\GameInfo.json", text);
-            string path = "{\"radsPath\":\"" + pathBox.Text + "\"}";
-            File.WriteAllText(settingsFolder + "\\settings.json", path);
+            IWLauncher.Properties.Settings.Default.PathLol420 = pathBox.Text;
             IWLauncher.Properties.Settings.Default.ip = ipBox.Text;
             IWLauncher.Properties.Settings.Default.port = portBox.Text;
             IWLauncher.Properties.Settings.Default.Save();

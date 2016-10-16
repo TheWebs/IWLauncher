@@ -8,5 +8,11 @@
     <Setting Name="port" Type="System.String" Scope="User">
       <Value Profile="(Default)">5119</Value>
     </Setting>
+    <Setting Name="PathLol420" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FirstTime" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
