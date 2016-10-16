@@ -108,7 +108,7 @@ namespace IWLauncher
         {
             MessageBox.Show("@cd /d \"" + pathBox.Text.Replace("RADS/projects/lol_game_client", "").Replace(@"/", @"\") + "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\"");
             //CMD
-            //Process.Start("IntWarsSharp.exe"); ---->uncomment when server can be executed from the .exe file
+            Process.Start("LeagueSandboxGameServer.exe");
             //System.Threading.Thread.Sleep(1500);
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
@@ -128,7 +128,7 @@ namespace IWLauncher
 
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e) //Save button ----> Save settings
         {
             if (mapCombo.SelectedIndex == 0) { map = "1"; } //SR
             if (mapCombo.SelectedIndex == 3) { map = "8"; } //CS
@@ -136,15 +136,16 @@ namespace IWLauncher
             if (mapCombo.SelectedIndex == 2) { map = "12"; } //HA
             GameInfo info = new GameInfo();
             info.name = nameBox.Text;
-            info.icon = iconComboBox.SelectedItem.ToString();
+            info.icon = int.Parse(iconComboBox.SelectedItem.ToString());
             info.rank = comboBox.SelectedItem.ToString();
             info.team = comboBox1.SelectedItem.ToString();
             info.summoner1 = sum1Box.Text;
             info.summoner2 = sum2Box.Text;
-            info.ribbon = comboBox2.SelectedItem.ToString();
-            info.skin = skinBox.Text;
+            info.ribbon = int.Parse(comboBox2.SelectedItem.ToString());
+            info.skin = int.Parse(skinBox.Text);
             info.champion = championBox.Text;
-            string text = JsonConvert.SerializeObject(info);
+            //Write to file
+            string text = JsonConvert.SerializeObject(info); 
             text = "{\"players\": [ {" + text.Replace("{", "").Replace("}", "") + runes + "],\"game\": {\"map\": " + map + ",\"gameMode\": \"" + gameModeCombo.SelectedItem + "\"}" + beta + "}";
             File.WriteAllText(settingsFolder + "\\GameInfo.json", text);
             string path = "{\"radsPath\":\"" + pathBox.Text + "\"}";
@@ -153,6 +154,7 @@ namespace IWLauncher
             IWLauncher.Properties.Settings.Default.port = portBox.Text;
             IWLauncher.Properties.Settings.Default.Save();
             MessageBox.Show("New settings have been saved!", "IWLauncher", MessageBoxButton.OK, MessageBoxImage.Information);
+            //end writing
         }
 
         private void iconComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -215,7 +217,7 @@ namespace IWLauncher
               ""30"": 5335
             }}";
 
-        string beta = @"""spellInfo"": {
+        string beta = @", ""spellInfo"": {
       // True = sandbox mode
       // False = normal game
       ""NO_MANACOST"": true,
