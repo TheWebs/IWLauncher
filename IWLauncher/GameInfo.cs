@@ -18,6 +18,13 @@ namespace IWLauncher
         public string rank { get; set; }
         public string team { get; set; }
         public int icon { get; set; }
+    }
+
+    public class GameInfo2 {
+        public string MANACOSTS_ENABLED { get; set; }
+        public string COOLDOWNS_ENABLED { get; set; }
+        public string CHEATS_ENABLED { get; set; }
+        public string MINION_SPAWNS_ENABLED { get; set; }
 
     }
 }
